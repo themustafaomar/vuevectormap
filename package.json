@@ -1,0 +1,48 @@
+{
+  "name": "vuevectormap",
+  "version": "1.0.0",
+  "description": "A Vue wrapper component for Jsvectormap",
+  "main": "dist/js/vuevectormap.min.js",
+  "style": "dist/css/vuevectormap.css",
+  "sass": "dist/css/vuevectormap.css",
+  "author": {
+    "name": "Mustafa Omar",
+    "email": "themustafaomar@gmail.com"
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "vue",
+    "vector",
+    "interactive",
+    "map",
+    "svg"
+  ],
+  "files": [
+    "dist",
+    "src",
+    "LICENCE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themustafaomar/vuevectormap.git"
+  },
+  "bugs": {
+    "url": "https://github.com/themustafaomar/vuevectormap/issues"
+  },
+  "homepage": "https://github.com/themustafaomar/vuevectormap#readme",
+  "dependencies": {
+    "jsvectormap": "^1.0.5",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "rollup": "^2.6.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-css-only": "^2.0.0",
+    "rollup-plugin-terser": "^5.3.0"
+  }
+}
