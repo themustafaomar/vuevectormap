@@ -25,10 +25,48 @@ Vue.use(VueVectorMap, {
   // check the jsvectormap repo to get all configurations options..
 })
 ```
-Just define vuevectormap component and we're done.
+Just define vuevectormap component and we're done!<br>
+Notice: the default map is world, so you don't have to pass `map` prop.
 ```vue
 <template>
-  <vuevectormap></vuevectormap>
+  <div class="...">
+    <vuevectormap></vuevectormap>
+  </div>
+</template>
+```
+
+### Nuxtjs
+In `nuxt.config.js` create a new plugin object with ssr equal to `false`.
+```js
+...
+
+plugins: [
+  { src: '@/plugins/vuevectormap.js', ssr: false }
+],
+
+...
+```
+Create a new file in plugins directory with a name `vuevectormap.js`
+```js
+import Vue from 'vue'
+import VueVectorMap from 'vuevectormap/dist/js/vuevectormap'
+import 'vuevectormap/dist/css/vuevectormap.css'
+
+// Import your preffered map.
+require('jsvectormap/dist/maps/spain')
+
+Vue.use(VueVectorMap)
+```
+
+You may face some issues if you declare `vuevectormap` component.<br>
+To avoid problems wrap `vuevectormap` in no-ssr tag.
+```vue
+<template>
+  <div class="...">
+    <no-ssr>
+      <vuevectormap map="spain"></vuevectormap>
+    </no-ssr>
+  </div>
 </template>
 ```
 
@@ -44,7 +82,6 @@ Set jsvectormap configurations via props
 ```
 
 ## Handle events
-
 ```vue
 <vuevectormap
   @viewportChange="handleEvent"
@@ -60,7 +97,7 @@ Set jsvectormap configurations via props
 ```html
 <template>
   <vuevectormap
-    ref="vvmap"
+    ref="map"
     :width="800"
     :height="400"
     :labels="labels"
@@ -87,7 +124,7 @@ Set jsvectormap configurations via props
 <script>
 export default {
   mounted() {
-    this.map = this.$refs.vvmap
+    this.map = this.$refs.map.getInstance()
   },
   data: () => ({
     map: null,
