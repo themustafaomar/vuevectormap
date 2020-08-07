@@ -42,7 +42,11 @@ export default {
   // We won't add any methods to make the package much lighter
   // If we want to access some method, we'll add a ref to `vuevectormap` component
   // and access the map methods example: this.$refs.map.$map.aMethod()
-  // methods: {},
+  methods: {
+    getInstance() {
+      return this.$map
+    }
+  },
 
   props: {
     height: {

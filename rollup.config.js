@@ -1,30 +1,36 @@
-import { terser } from 'rollup-plugin-terser'
-import resolve from '@rollup/plugin-node-resolve'
-import babel from 'rollup-plugin-babel'
-import css from 'rollup-plugin-css-only'
+import { terser } from "rollup-plugin-terser";
+import resolve from "@rollup/plugin-node-resolve";
+import babel from "rollup-plugin-babel";
+import css from "rollup-plugin-css-only";
 
 module.exports = {
-  input: 'src/index.js',
+  input: "src/index.js",
 
-  output: [{
-    name: 'VueVectorMap',
-    file: 'dist/js/vuevectormap.js',
-    format: 'umd',
-    globals: {
-      'jsvectormap': 'JsVectorMap'
+  output: [
+    {
+      name: "VueVectorMap",
+      file: "dist/js/vuevectormap.js",
+      format: "umd",
+      globals: {
+        jsvectormap: "JsVectorMap",
+      },
     },
-  }, {
-    name: 'VueVectorMap',
-    file: 'dist/js/vuevectormap.min.js',
-    format: 'umd',
-    plugins: [ terser() ]
-  }],
+    {
+      name: "VueVectorMap",
+      file: "dist/js/vuevectormap.min.js",
+      format: "umd",
+      globals: {
+        jsvectormap: "JsVectorMap",
+      },
+      plugins: [terser()],
+    },
+  ],
 
-  external: ['jsvectormap'],
+  external: ["jsvectormap"],
 
   plugins: [
     resolve(),
-    babel({ exclude: 'node_modules/**' }),
-    css({ output: 'dist/css/vuevectormap.css' }),
-  ]
-}
+    babel({ exclude: "node_modules/**" }),
+    css({ output: "dist/css/vuevectormap.css" }),
+  ],
+};

@@ -45,7 +45,11 @@
     // We won't add any methods to make the package much lighter
     // If we want to access some method, we'll add a ref to `vuevectormap` component
     // and access the map methods example: this.$refs.map.$map.aMethod()
-    // methods: {},
+    methods: {
+      getInstance: function getInstance() {
+        return this.$map;
+      }
+    },
     props: {
       height: {
         type: [String, Number],
@@ -108,7 +112,7 @@
         (function () {
           var value = options[option];
           VueVectorMapComponent.props[option] = {
-            default: typeof value != 'object' ? value : function () {
+            default: typeof value != "object" ? value : function () {
               return value;
             }
           };
@@ -116,7 +120,7 @@
       }
     }
 
-    Vue.component('vuevectormap', VueVectorMapComponent);
+    Vue.component("vuevectormap", VueVectorMapComponent);
   };
 
   return index;

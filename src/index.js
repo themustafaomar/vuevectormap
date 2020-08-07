@@ -1,18 +1,17 @@
-import VueVectorMapComponent from './VueVectorMapComponent'
+import VueVectorMapComponent from "./VueVectorMapComponent";
 
 export default VueVectorMapComponent.install = (Vue, options = {}) => {
+  let props = VueVectorMapComponent.props
 
-	let props = VueVectorMapComponent.props
+  for (let option in options) {
+    if (props.hasOwnProperty(option)) {
+      let value = options[option]
 
-	for (let option in options) {
-		if (props.hasOwnProperty(option)) {
-			let value = options[option]
+      VueVectorMapComponent.props[option] = {
+        default: typeof value != "object" ? value : () => value,
+      }
+    }
+  }
 
-			VueVectorMapComponent.props[option] = {
-				default: typeof value != 'object' ? value : () => value
-			}
-		}
-	}
-
-	Vue.component('vuevectormap', VueVectorMapComponent)
+  Vue.component("vuevectormap", VueVectorMapComponent)
 }
