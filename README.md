@@ -7,6 +7,10 @@ Installing via npm
 npm i vuevectormap
 ```
 
+## Demo
+Example at [vuevectormap](https://codepen.io/themustafaomar/pen/pojyerx)<br>
+Example at [codesandbox](https://4f9cw.csb.app) and [code](https://codesandbox.io/s/vuevectormap-4f9cw)
+
 ## Get started
 ```js
 import Vue from 'vue'
@@ -49,7 +53,7 @@ plugins: [
 Create a new file in plugins directory with a name `vuevectormap.js`
 ```js
 import Vue from 'vue'
-import VueVectorMap from 'vuevectormap/dist/js/vuevectormap'
+import VueVectorMap from 'vuevectormap'
 import 'vuevectormap/dist/css/vuevectormap.css'
 
 // Import your preffered map.
