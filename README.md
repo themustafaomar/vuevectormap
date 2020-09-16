@@ -39,7 +39,7 @@ Notice: the default map is world, so you don't have to pass `map` prop.
 </template>
 ```
 
-### Nuxtjs
+### Nuxtjs (SSR)
 In `nuxt.config.js` create a new plugin object with ssr equal to `false`.
 ```js
 ...
@@ -62,14 +62,17 @@ require('jsvectormap/dist/maps/spain')
 Vue.use(VueVectorMap)
 ```
 
-You may face some issues if you declare `vuevectormap` component.<br>
-To avoid problems wrap `vuevectormap` in no-ssr tag.
+You may face some issues if you declare `vuevectormap` component. directly<br>
+To avoid problems wrap `vuevectormap` in client-only tag.
+
+**Warning**: If you are using a version of Nuxt < v2.9.0, use `<no-ssr>` instead of `<client-only>`, [See docs](https://nuxtjs.org/guides/features/nuxt-components#the-client-only-component)
+  
 ```vue
 <template>
   <div class="...">
-    <no-ssr>
+    <client-only>
       <vuevectormap map="spain"></vuevectormap>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 ```
