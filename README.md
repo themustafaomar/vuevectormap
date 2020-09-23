@@ -15,6 +15,7 @@ Example at [codesandbox](https://4f9cw.csb.app) and [code](https://codesandbox.i
 ```js
 import Vue from 'vue'
 import VueVectorMap from 'vuevectormap'
+import 'vuevectormap/src/scss/VueVectorMap.scss'
 
 // Import your preferred map
 require('jsvectormap/dist/maps/world')
@@ -29,7 +30,7 @@ Vue.use(VueVectorMap, {
   // check the jsvectormap repo to get all configurations options..
 })
 ```
-Just define vuevectormap component and we're done!<br>
+Just define `vuevectormap` component and we're done!<br>
 Notice: the default map is world, so you don't have to pass `map` prop.
 ```vue
 <template>
@@ -38,9 +39,18 @@ Notice: the default map is world, so you don't have to pass `map` prop.
   </div>
 </template>
 ```
+**Tip:** if you're using sass and and you want to overwrite the default style, the below snippet is for you.<br>
+Look at [this file](https://github.com/themustafaomar/jsvectormap/blob/master/src/scss/jsvectormap.scss) to know about all possible variables.
+```scss
+// Example variables.
+$tooltip-bg-color: #3a3d4c;
+$tooltip-font-family: Roboto, Etc;
 
-### Nuxtjs
-In `nuxt.config.js` create a new plugin object with ssr equal to `false`.
+@import 'jsvectormap';
+```
+
+### Nuxtjs (SSR)
+In `nuxt.config.js` create a new plugin object with mode equal to `client`, for Nuxt < 2.4 use ssr `false`, [See docs](https://nuxtjs.org/guides/configuration-glossary/configuration-plugins).
 ```js
 ...
 
@@ -54,7 +64,7 @@ Create a new file in plugins directory with a name `vuevectormap.js`
 ```js
 import Vue from 'vue'
 import VueVectorMap from 'vuevectormap'
-import 'vuevectormap/dist/css/vuevectormap.css'
+import 'vuevectormap/src/scss/VueVectorMap.scss'
 
 // Import your preffered map.
 require('jsvectormap/dist/maps/spain')
@@ -62,14 +72,17 @@ require('jsvectormap/dist/maps/spain')
 Vue.use(VueVectorMap)
 ```
 
-You may face some issues if you declare `vuevectormap` component.<br>
-To avoid problems wrap `vuevectormap` in no-ssr tag.
+You may face some issues if you declare `vuevectormap` component. directly<br>
+To avoid problems wrap `vuevectormap` in client-only tag.
+
+**Warning**: If you are using a version of Nuxt < v2.9.0, use `<no-ssr>` instead of `<client-only>`, [See docs](https://nuxtjs.org/guides/features/nuxt-components#the-client-only-component)
+  
 ```vue
 <template>
   <div class="...">
-    <no-ssr>
+    <client-only>
       <vuevectormap map="spain"></vuevectormap>
-    </no-ssr>
+    </client-only>
   </div>
 </template>
 ```
@@ -88,6 +101,7 @@ Set jsvectormap configurations via props
 ## Handle events
 ```vue
 <vuevectormap
+  @loaded="handleEvent"
   @viewportChange="handleEvent"
   @regionSelected="handleEvent"
   @markerSelected="handleEvent"
@@ -102,8 +116,8 @@ Set jsvectormap configurations via props
 <template>
   <vuevectormap
     ref="map"
-    :width="800"
-    :height="400"
+    :width="800px"
+    :height="400px"
     :labels="labels"
     :focusOn="{ region: 'EG', animate: true }"
     backgroundColor="#FFF"
@@ -128,7 +142,7 @@ Set jsvectormap configurations via props
 <script>
 export default {
   mounted() {
-    this.map = this.$refs.map.getInstance()
+    this.map = this.$refs.map.getMap()
   },
   data: () => ({
     map: null,

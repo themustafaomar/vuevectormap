@@ -2,15 +2,15 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('jsvectormap')) :
   typeof define === 'function' && define.amd ? define(['jsvectormap'], factory) :
   (global = global || self, global.VueVectorMap = factory(global.JsVectorMap));
-}(this, (function (JsVectorMap) { 'use strict';
+}(this, (function (jsVectorMap) { 'use strict';
 
-  JsVectorMap = JsVectorMap && Object.prototype.hasOwnProperty.call(JsVectorMap, 'default') ? JsVectorMap['default'] : JsVectorMap;
+  jsVectorMap = jsVectorMap && jsVectorMap.hasOwnProperty('default') ? jsVectorMap['default'] : jsVectorMap;
 
   var VueVectorMapComponent = {
     data: function data() {
       return {
         id: null,
-        $map: null
+        instance: null
       };
     },
     render: function render(h) {
@@ -18,7 +18,7 @@
       return h('div', {
         attrs: {
           id: this.id,
-          style: "width: " + this.width + "px;height: " + this.height + "px"
+          style: "width: " + this.width + "; height: " + this.height
         }
       });
     },
@@ -35,32 +35,30 @@
         if (props[option] != undefined) {
           options[option] = props[option];
         }
-      } // We supposed to use this.$el
-      // But there is a bug in jsvectormap, It'll be fixed soon
-
+      }
 
       options.selector = "#" + this.id;
-      this.$map = new JsVectorMap(options);
+      this.instance = new jsVectorMap(options);
     },
     // We won't add any methods to make the package much lighter
     // If we want to access some method, we'll add a ref to `vuevectormap` component
-    // and access the map methods example: this.$refs.map.$map.aMethod()
+    // and access the map methods example: this.$refs.myMap.getMap.accessSomeMethod()
     methods: {
-      getInstance: function getInstance() {
-        return this.$map;
+      getMap: function getMap() {
+        return this.instance;
       }
     },
     props: {
       height: {
-        type: [String, Number],
+        type: String,
         default: function _default() {
-          return 300;
+          return '300px';
         }
       },
       width: {
-        type: [String, Number],
+        type: String,
         default: function _default() {
-          return 600;
+          return '600px';
         }
       },
       map: String,

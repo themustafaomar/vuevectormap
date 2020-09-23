@@ -1,10 +1,9 @@
-import JsVectorMap from 'jsvectormap'
-import 'jsvectormap/dist/css/jsvectormap.css'
+import jsVectorMap from 'jsvectormap'
 
 export default {
   data: () => ({
     id: null,
-    $map: null,
+    instance: null,
   }),
   render(h) {
     this.id = `vuevectormap__${this._uid}`
@@ -12,7 +11,7 @@ export default {
     return h('div', {
       attrs: {
         id: this.id,
-        style: `width: ${this.width}px;height: ${this.height}px`,
+        style: `width: ${this.width}; height: ${this.height}`,
       },
     })
   },
@@ -32,30 +31,28 @@ export default {
       }
     }
 
-    // We supposed to use this.$el
-    // But there is a bug in jsvectormap, It'll be fixed soon
     options.selector = `#${this.id}`
 
-    this.$map = new JsVectorMap(options)
+    this.instance = new jsVectorMap(options)
   },
 
   // We won't add any methods to make the package much lighter
   // If we want to access some method, we'll add a ref to `vuevectormap` component
-  // and access the map methods example: this.$refs.map.$map.aMethod()
+  // and access the map methods example: this.$refs.myMap.getMap.accessSomeMethod()
   methods: {
-    getInstance() {
-      return this.$map
+    getMap() {
+      return this.instance
     }
   },
 
   props: {
     height: {
-      type: [String, Number],
-      default: () => 300
+      type: String,
+      default: () => '300px'
     },
     width: {
-      type: [String, Number],
-      default: () => 600
+      type: String,
+      default: () => '600px'
     },
 
     map: String,
