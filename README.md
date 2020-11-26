@@ -15,7 +15,7 @@ Example at [codesandbox](https://4f9cw.csb.app) and [code](https://codesandbox.i
 ```js
 import Vue from 'vue'
 import VueVectorMap from 'vuevectormap'
-import 'vuevectormap/src/scss/VueVectorMap.scss'
+import 'vuevectormap/src/scss/vuevectormap.scss'
 
 // Import your preferred map
 require('jsvectormap/dist/maps/world')
@@ -31,7 +31,7 @@ Vue.use(VueVectorMap, {
 })
 ```
 Just define `vuevectormap` component and we're done!<br>
-Notice: the default map is world, so you don't have to pass `map` prop.
+**Notice**: the default map is world, so you don't have to pass `map` prop.
 ```vue
 <template>
   <div class="...">
@@ -46,16 +46,16 @@ Look at [this file](https://github.com/themustafaomar/jsvectormap/blob/master/sr
 $tooltip-bg-color: #3a3d4c;
 $tooltip-font-family: Roboto, Etc;
 
-@import 'jsvectormap';
+@import 'vuevectormap';
 ```
 
-### Nuxtjs (SSR)
+### Nuxtjs
 In `nuxt.config.js` create a new plugin object with mode equal to `client`, for Nuxt < 2.4 use ssr `false`, [See docs](https://nuxtjs.org/guides/configuration-glossary/configuration-plugins).
 ```js
 ...
 
 plugins: [
-  { src: '@/plugins/vuevectormap.js', ssr: false }
+  { src: '@/plugins/vuevectormap.js', mode: 'client' }
 ],
 
 ...
@@ -64,7 +64,7 @@ Create a new file in plugins directory with a name `vuevectormap.js`
 ```js
 import Vue from 'vue'
 import VueVectorMap from 'vuevectormap'
-import 'vuevectormap/src/scss/VueVectorMap.scss'
+import 'vuevectormap/src/scss/vuevectormap.scss'
 
 // Import your preffered map.
 require('jsvectormap/dist/maps/spain')

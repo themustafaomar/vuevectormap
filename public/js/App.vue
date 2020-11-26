@@ -19,7 +19,7 @@
 <script>
 import Vue from 'vue'
 import VueVectorMap from '../../dist/js/vuevectormap.min.js'
-import '../../src/scss/VueVectorMap.scss'
+import '../../src/scss/vuevectormap.scss'
 
 // Import your preffered map
 require('jsvectormap/dist/maps/world.js')
