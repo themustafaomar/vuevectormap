@@ -3,11 +3,19 @@
     <div style="display: flex; justify-content: center; margin-top: 5rem">
       <vuevectormap
         ref="map"
-        width="700px"
-        height="400px"
+        map="world_merc"
+        width="800px"
+        height="450px"
+        :regionStyle="{ initial: { fill: '#d1d5db' } }"
         :markers="markers"
         :markerStyle="markerStyle"
-        :markerLabelStyle="markerLabelStyle"
+        :lines="[
+          { from: 'Canada', to: 'Palestine' },
+          { from: 'Canada', to: 'Greenland' },
+          { from: 'Canada', to: 'Russia' },
+          { from: 'Canada', to: 'Brazil' },
+        ]"
+        :lineStyle="{ strokeDasharray: [6, 3, 6], animation: true }"
         :labels="labels"
         @loaded="loaded"
         @regionTooltipShow="regionTooltipShow">
@@ -18,11 +26,12 @@
 
 <script>
 import Vue from 'vue'
-import VueVectorMap from '../../dist/js/vuevectormap.min.js'
+// import VueVectorMap from '../../dist/js/vuevectormap.min.js'
+import VueVectorMap from '../../src/index'
 import '../../src/scss/vuevectormap.scss'
 
 // Import your preffered map
-require('jsvectormap/dist/maps/world.js')
+require('jsvectormap/dist/maps/world-merc.js')
 
 Vue.use(VueVectorMap)
 
@@ -31,7 +40,7 @@ export default {
     map: null,
     markers: [
       { name: 'Russia', coords: [61, 105] },
-      { name: 'Geenland', coords: [72, -42] },
+      { name: 'Greenland', coords: [72, -42] },
       { name: 'Canada', coords: [56, -106] },
       { name: 'Palestine', coords: [31.5, 34.8] },
       { name: 'Brazil', coords: [-14.2350, -51.9253] },
@@ -39,17 +48,7 @@ export default {
     markerStyle: {
       initial: {
         fill: '#ff4551',
-        r: 6,
-        strokeWidth: 4
       }
-    },
-    markerLabelStyle: {
-      initial: {
-        fontFamily: 'Sans-serif',
-        fontSize: 13.5,
-        fontWeight: 500,
-        fill: '#35373e',
-      },
     },
   }),
 
@@ -59,9 +58,7 @@ export default {
 
       return {
         markers: {
-          render: function(index) {
-            return markers[index].name;
-          },
+          render: marker => marker.name
         },
       }
     }
@@ -82,8 +79,4 @@ export default {
     }
   }
 }
-</script>
-
-<style>
-  
-</style>
+</script> 

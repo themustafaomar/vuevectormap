@@ -82,6 +82,13 @@ export default {
     },
     markerLabelStyle: Object,
 
+    // Lines
+    lines: Array,
+    lineStyle: {
+      type: Object,
+      default: () => {}
+    },
+
     // Regions
     selectedRegions: Array,
     regionsSelectable: null,
