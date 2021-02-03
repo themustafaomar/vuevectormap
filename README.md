@@ -184,13 +184,11 @@ export default {
   }),
   computed: {
     labels() {
-      const markers = this.markers
-
       // Labels for markers and regions
       return {
         markers: {
-          render(index) {
-            return markers[index].name
+          render(marker, index) {
+            return marker.name
           }
         },
         regions: {
