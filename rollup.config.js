@@ -12,7 +12,7 @@ module.exports = {
       file: "dist/js/vuevectormap.js",
       format: "umd",
       globals: {
-        jsvectormap: "JsVectorMap",
+        jsvectormap: "jsVectorMap",
       },
     },
     {
@@ -20,7 +20,7 @@ module.exports = {
       file: "dist/js/vuevectormap.min.js",
       format: "umd",
       globals: {
-        jsvectormap: "JsVectorMap",
+        jsvectormap: "jsVectorMap",
       },
       plugins: [terser()],
     },

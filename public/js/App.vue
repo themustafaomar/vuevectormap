@@ -26,9 +26,8 @@
 
 <script>
 import Vue from 'vue'
-// import VueVectorMap from '../../dist/js/vuevectormap.min.js'
 import VueVectorMap from '../../src/index'
-import '../../src/scss/vuevectormap.scss'
+import '../../src/scss/VueVectorMap.scss'
 
 // Import your preffered map
 require('jsvectormap/dist/maps/world-merc.js')
@@ -46,23 +45,14 @@ export default {
       { name: 'Brazil', coords: [-14.2350, -51.9253] },
     ],
     markerStyle: {
-      initial: {
-        fill: '#ff4551',
-      }
+      initial: { fill: '#ff4551' }
     },
-  }),
-
-  computed: {
-    labels() {
-      const markers = this.markers
-
-      return {
-        markers: {
-          render: marker => marker.name
-        },
+    labels: {
+      markers: {
+        render: marker => marker.name
       }
     }
-  },
+  }),
 
   mounted() {
     this.map = this.$refs.map.getMap()
