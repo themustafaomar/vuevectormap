@@ -21,7 +21,7 @@ export default {
 
     // Append callbacks to options
     for (let event in this.$listeners) {
-      options['on' + event.charAt(0).toUpperCase() + event.slice(1)] = this.$listeners[event]
+      options[`on${event.charAt(0).toUpperCase() + event.slice(1)}`] = this.$listeners[event]
     }
 
     // Append the passed options
