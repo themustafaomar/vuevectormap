@@ -1,5 +1,9 @@
 import jsVectorMap from 'jsvectormap'
 
+if (typeof window === 'object') {
+  window.jsVectorMap = jsVectorMap
+}
+
 export default {
   data: () => ({
     id: null,
