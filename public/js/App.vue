@@ -2,21 +2,23 @@
   <div class="container">
     <div style="display: flex; justify-content: center; margin-top: 5rem">
       <vuevectormap
-        ref="map"
-        map="world_merc"
-        width="800px"
-        height="450px"
-        :regionStyle="{ initial: { fill: '#d1d5db' } }"
-        :markers="markers"
-        :markerStyle="markerStyle"
-        :lines="[
-          { from: 'Canada', to: 'Palestine' },
-          { from: 'Canada', to: 'Greenland' },
-          { from: 'Canada', to: 'Russia' },
-          { from: 'Canada', to: 'Brazil' },
-        ]"
-        :lineStyle="{ strokeDasharray: [6, 3, 6], animation: true }"
-        :labels="labels"
+        ref="jvm"
+        width="800"
+        height="450"
+        :options="{
+          map: 'world_merc',
+          regionStyle: { initial: { fill: '#d1d5db' } },
+          markers,
+          markerStyle,
+          lines: [
+            { from: 'Canada', to: 'Palestine' },
+            { from: 'Canada', to: 'Greenland' },
+            { from: 'Canada', to: 'Russia' },
+            { from: 'Canada', to: 'Brazil' },
+          ],
+          lineStyle: { strokeDasharray: [6, 3, 6], animation: true },
+          labels: labels
+        }"
         @loaded="loaded"
         @regionTooltipShow="regionTooltipShow">
       </vuevectormap>
@@ -27,7 +29,6 @@
 <script>
 export default {
   data: () => ({
-    map: null,
     markers: [
       { name: 'Russia', coords: [61, 105] },
       { name: 'Greenland', coords: [72, -42] },
@@ -44,11 +45,9 @@ export default {
       }
     }
   }),
-
   mounted() {
-    this.map = this.$refs.map.getMap()
+    this.map = this.$refs.jvm.map
   },
-
   methods: {
     loaded(map) {
       window.addEventListener('resize', () => {

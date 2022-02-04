@@ -1,3 +1,4 @@
+import { h, getCurrentInstance, onMounted, useAttrs } from 'vue'
 import jsVectorMap from 'jsvectormap'
 
 if (typeof window === 'object') {
@@ -5,104 +6,46 @@ if (typeof window === 'object') {
 }
 
 export default {
-  data: () => ({
-    id: null,
-    instance: null,
-  }),
-  render(h) {
-    this.id = `vuevectormap__${this._uid}`
-
-    return h('div', {
-      attrs: {
-        id: this.id,
-        style: `width: ${this.width}; height: ${this.height}`,
-      },
-    })
+  props: {
+    options: Object,
+    width: {
+      type: [Number, String],
+      default: 650,
+    },
+    height: {
+      type: [Number, String],
+      default: 350,
+    },
   },
-  mounted() {
-    let options = {},
-      props = this.$props
+  data: () => ({
+    map: {}
+  }),
+  setup() {
+    const instance = getCurrentInstance()
+    const props = instance.props
+    const id = `__vm__${instance.uid}`
+    const listeners = {}
 
-    // Append callbacks to options
-    for (let event in this.$listeners) {
-      options[`on${event.charAt(0).toUpperCase() + event.slice(1)}`] = this.$listeners[event]
-    }
-
-    // Append the passed options
-    for (let option in props) {
-      if (props[option] != undefined) {
-        options[option] = props[option]
+    for (const [name, fn] of Object.entries(useAttrs())) {
+      if (name.startsWith('on')) {
+        listeners[name] = fn
       }
     }
 
-    options.selector = `#${this.id}`
+    onMounted(() => {
+      instance.data.map = new jsVectorMap({
+        selector: `#${id}`,
+        ...props.options,
+        ...listeners,
+      })
+    })
 
-    this.instance = new jsVectorMap(options)
-  },
-
-  // We won't add any methods to make the package much lighter
-  // If we want to access some method, we'll add a ref to `vuevectormap` component
-  // and access the map methods example: this.$refs.myMap.getMap.accessSomeMethod()
-  methods: {
-    getMap() {
-      return this.instance
-    }
-  },
-
-  props: {
-    height: {
-      type: String,
-      default: () => '300px'
-    },
-    width: {
-      type: String,
-      default: () => '600px'
-    },
-
-    map: String,
-    backgroundColor: String,
-    draggable: null,
-    zoomButtons: null,
-    zoomOnScroll: null,
-    zoomOnScrollSpeed: Number,
-    zoomMax: Number,
-    zoomMin: Number,
-    zoomAnimate: null,
-    showTooltip: null,
-    zoomStep: Number,
-    focusOn: Object,
-
-    // Labels for markers and regions
-    labels: Object,
-
-    // Markers
-    markers: Array,
-    selectedMarkers: Array,
-    markersSelectable: null,
-    markersSelectableOne: null,
-    markerStyle: {
-      type: Object,
-      default: () => {}
-    },
-    markerLabelStyle: Object,
-
-    // Lines
-    lines: Array,
-    lineStyle: {
-      type: Object,
-      default: () => {}
-    },
-
-    // Regions
-    selectedRegions: Array,
-    regionsSelectable: null,
-    regionsSelectableOne: null,
-    regionStyle: {
-      type: Object,
-      default: () => {}
-    },
-    regionLabelStyle: Object,
-
-    series: Object,
-  },
+    return () => h('div', {
+      id,
+      style: {
+        height: `${props.height}px`,
+        width: `${props.width}px`
+      }
+    })
+  }
 }
