@@ -1,4 +1,4 @@
-import VueVectorMapComponent from "./VueVectorMapComponent";
+import VueVectorMapComponent from './VueVectorMapComponent'
 
 export default VueVectorMapComponent.install = (Vue, options = {}) => {
   let props = VueVectorMapComponent.props
@@ -8,10 +8,10 @@ export default VueVectorMapComponent.install = (Vue, options = {}) => {
       let value = options[option]
 
       VueVectorMapComponent.props[option] = {
-        default: typeof value != "object" ? value : () => value,
+        default: typeof value != 'object' ? value : () => value,
       }
     }
   }
 
-  Vue.component("vuevectormap", VueVectorMapComponent)
+  Vue.component('vuevectormap', VueVectorMapComponent)
 }

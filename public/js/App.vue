@@ -25,15 +25,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VueVectorMap from '../../src/index'
-import '../../src/scss/VueVectorMap.scss'
-
-// Import your preffered map
-require('jsvectormap/dist/maps/world-merc.js')
-
-Vue.use(VueVectorMap)
-
 export default {
   data: () => ({
     map: null,
@@ -65,7 +56,7 @@ export default {
       })
     },
     regionTooltipShow(tooltip, code) {
-      // console.log(tooltip, code);
+      console.log(tooltip, code);
     }
   }
 }
