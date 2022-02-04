@@ -5,7 +5,7 @@ A Vue wrapper component for Jsvectormap [jsvectormap](https://github.com/themust
 
 | Vuejs version | Package version | Branch |
 | :---          |:---------------:| ---:   | 
-| 3.x           |       2.x       | `next` |
+| 3.x           |       2.x       | `next` (in development) |
 | 2.x           |       1.x       | [master](https://github.com/themustafaomar/vuevectormap/tree/master) |
 
 ## Installation
@@ -21,23 +21,21 @@ Example at [codesandbox](https://4f9cw.csb.app) and [code](https://codesandbox.i
 ## Get started
 
 ```js
-import Vue from 'vue'
+import { createApp, h } from 'vue'
 import VueVectorMap from 'vuevectormap'
 import 'vuevectormap/src/scss/vuevectormap.scss'
 
 // Import your preferred map
 require('jsvectormap/dist/maps/world')
 
-Vue.use(VueVectorMap)
-
-// You can set defaults globally
-Vue.use(VueVectorMap, {
-  map: 'world',
-  backgroundColor: 'orange',
-  // And so on..
-  // check the jsvectormap repo to get all configurations options..
+const app = createApp({
+  // render: () => h(Root)
 })
+
+app.use(VueVectorMap)
+app.mount('#app')
 ```
+
 Just define `vuevectormap` component and we're done!<br>
 **Notice**: the default map is world, so you don't have to pass `map` prop.
 
@@ -59,7 +57,7 @@ $tooltip-font-family: Roboto, Etc;
 
 @import 'vuevectormap';
 ```
-
+<!-- 
 ### Nuxtjs
 In `nuxt.config.js` create a new plugin object with mode equal to `client`, for Nuxt < 2.4 use ssr `false`, [See docs](https://nuxtjs.org/guides/configuration-glossary/configuration-plugins).
 ```js
@@ -221,3 +219,4 @@ Your contributions always **welcome**
 ## License
 
 vuevectormap licensed under MIT.
+ -->
