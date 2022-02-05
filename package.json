@@ -1,6 +1,6 @@
 {
   "name": "vuevectormap",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "description": "A Vue wrapper component for Jsvectormap",
   "main": "dist/js/vuevectormap.min.js",
   "style": "dist/css/vuevectormap.css",
