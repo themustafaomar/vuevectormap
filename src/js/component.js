@@ -1,11 +1,14 @@
-import { h, getCurrentInstance, onMounted, useAttrs } from 'vue'
+import { defineComponent, getCurrentInstance, useAttrs, onMounted, h } from "vue"
+import { globals } from "./globals"
 import jsVectorMap from 'jsvectormap'
 
 if (typeof window === 'object') {
   window.jsVectorMap = jsVectorMap
 }
 
-export default {
+export default defineComponent({
+  name: 'jvm',
+  inheritAttrs: false,
   props: {
     options: Object,
     width: {
@@ -18,13 +21,12 @@ export default {
     },
   },
   data: () => ({
+    id: '',
     map: {}
   }),
-  setup() {
-    const instance = getCurrentInstance()
-    const props = instance.props
-    const id = `__vm__${instance.uid}`
+  setup(props, ctx) {
     const listeners = {}
+    const instance = getCurrentInstance()
 
     for (const [name, fn] of Object.entries(useAttrs())) {
       if (name.startsWith('on')) {
@@ -33,19 +35,21 @@ export default {
     }
 
     onMounted(() => {
+      instance.data.id = `__vm__${instance.uid}`
       instance.data.map = new jsVectorMap({
-        selector: `#${id}`,
+        selector: `#${instance.data.id}`,
+        ...globals,
         ...props.options,
         ...listeners,
       })
     })
 
     return () => h('div', {
-      id,
+      id: instance.data.id,
       style: {
         height: `${props.height}px`,
         width: `${props.width}px`
       }
     })
   }
-}
+})

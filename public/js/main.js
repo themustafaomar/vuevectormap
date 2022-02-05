@@ -1,14 +1,15 @@
-import { createApp, h } from 'vue'
+import { createApp } from 'vue'
 import Root from './App'
 import VueVectorMap from '../../src/index'
 import '../../src/scss/VueVectorMap.scss'
 
-// Import your preffered map
+// Load your preffered map..
 require('jsvectormap/dist/maps/world-merc')
 
-const app = createApp({
-  render: () => h(Root)
+const app = createApp(Root)
+
+app.use(VueVectorMap, {
+  backgroundColor: '#f6f6f6'
 })
 
-app.use(VueVectorMap)
 app.mount('#app')
