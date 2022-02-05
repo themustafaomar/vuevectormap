@@ -1,19 +1,12 @@
-import VueVectorMapComponent from './VueVectorMapComponent'
+import Component from './js/component'
+import { globals } from './js/globals'
 
 export default {
   install(app, options = {}) {
-    let props = VueVectorMapComponent.props
+    Object.entries(options).forEach(([key, value]) => {
+      globals[key] = value
+    })
 
-    // for (let option in options) {
-    //   if (props.hasOwnProperty(option)) {
-    //     let value = options[option]
-
-    //     VueVectorMapComponent.props[option] = {
-    //       default: typeof value != 'object' ? value : () => value,
-    //     }
-    //   }
-    // }
-
-    app.component('vuevectormap', VueVectorMapComponent)
+    app.component('vuevectormap', Component)
   }
 }

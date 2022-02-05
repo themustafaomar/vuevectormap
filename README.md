@@ -21,18 +21,20 @@ Example at [codesandbox](https://4f9cw.csb.app) and [code](https://codesandbox.i
 ## Get started
 
 ```js
-import { createApp, h } from 'vue'
+import { createApp } from 'vue'
 import VueVectorMap from 'vuevectormap'
 import 'vuevectormap/src/scss/vuevectormap.scss'
 
 // Import your preferred map
 require('jsvectormap/dist/maps/world')
 
-const app = createApp({
-  // render: () => h(Root)
+const app = createApp({})
+
+app.use(VueVectorMap, {
+  // Set global options if any etc..
+  backgroundColor: '#f6f6f6'
 })
 
-app.use(VueVectorMap)
 app.mount('#app')
 ```
 
@@ -42,7 +44,16 @@ Just define `vuevectormap` component and we're done!<br>
 ```vue
 <template>
   <div class="...">
-    <vuevectormap></vuevectormap>
+    <vuevectormap
+      width="700"
+      height="350"
+      :options="{
+        // Map options..
+        // markers: []
+        // markerStyle: {}
+        // etc..
+      }">
+    </vuevectormap>
   </div>
 </template>
 ```
@@ -57,6 +68,7 @@ $tooltip-font-family: Roboto, Etc;
 
 @import 'vuevectormap';
 ```
+
 <!-- 
 ### Nuxtjs
 In `nuxt.config.js` create a new plugin object with mode equal to `client`, for Nuxt < 2.4 use ssr `false`, [See docs](https://nuxtjs.org/guides/configuration-glossary/configuration-plugins).
