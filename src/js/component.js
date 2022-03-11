@@ -2,10 +2,6 @@ import { defineComponent, getCurrentInstance, useAttrs, onMounted, h } from "vue
 import { globals } from "./globals"
 import jsVectorMap from 'jsvectormap'
 
-if (typeof window === 'object') {
-  window.jsVectorMap = jsVectorMap
-}
-
 export default defineComponent({
   name: 'jvm',
   inheritAttrs: false,
