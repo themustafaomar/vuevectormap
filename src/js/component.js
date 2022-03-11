@@ -3,7 +3,7 @@ import { globals } from "./globals"
 import jsVectorMap from 'jsvectormap'
 
 export default defineComponent({
-  name: 'jvm',
+  name: 'vuevectormap',
   inheritAttrs: false,
   props: {
     options: Object,
@@ -17,12 +17,12 @@ export default defineComponent({
     },
   },
   data: () => ({
-    id: '',
     map: {}
   }),
-  setup(props, ctx) {
+  setup(props) {
     const listeners = {}
     const instance = getCurrentInstance()
+    const uid = `__vm__${instance.uid}`
 
     for (const [name, fn] of Object.entries(useAttrs())) {
       if (name.startsWith('on')) {
@@ -31,9 +31,8 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      instance.data.id = `__vm__${instance.uid}`
       instance.data.map = new jsVectorMap({
-        selector: `#${instance.data.id}`,
+        selector: `#${uid}`,
         ...globals,
         ...props.options,
         ...listeners,
@@ -41,7 +40,7 @@ export default defineComponent({
     })
 
     return () => h('div', {
-      id: instance.data.id,
+      id: uid,
       style: {
         height: `${props.height}px`,
         width: `${props.width}px`

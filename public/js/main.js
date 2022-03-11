@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import Root from './App'
 // import VueVectorMap from '../../dist/js/vuevectormap'
-import VueVectorMap from '../../src/index'
-import '../../src/scss/vuevectormap.scss'
+import VueVectorMap from '../../src/js/index'
+import 'jsvectormap/src/scss/jsvectormap.scss'
 
 // Load your preffered map..
 require('jsvectormap/dist/maps/world-merc')
