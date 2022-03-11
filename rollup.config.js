@@ -31,7 +31,7 @@ export default [
     ],
   },
   {
-    input: 'src/index.js',
+    input: 'src/js/index.js',
     output: {
       name: 'VueVectorMap',
       file: 'dist/js/vuevectormap.min.js',
