@@ -1,33 +1,51 @@
-import { terser } from 'rollup-plugin-terser'
+import postcss from 'postcss'
+import scss from 'rollup-plugin-scss'
 import resolve from '@rollup/plugin-node-resolve'
 import { babel } from '@rollup/plugin-babel'
-import css from 'rollup-plugin-css-only'
+import { terser } from 'rollup-plugin-terser'
 
-module.exports = {
-  input: 'src/index.js',
-  output: [
-    {
+function processScss(filename, outputStyle = 'expanded') {
+  return {
+    processor: css => postcss().process(css).then(result => result.css),
+    output: `dist/css/${filename}.css`,
+    outputStyle,
+  }
+}
+
+export default [
+  {
+    input: 'src/js/index.js',
+    output: {
       name: 'VueVectorMap',
       file: 'dist/js/vuevectormap.js',
       format: 'umd',
       globals: {
-        jsvectormap: 'jsVectorMap',
+        jsvectormap: 'jsVectorMap'
       },
     },
-    {
+    external: ['jsvectormap', 'vue'],
+    plugins: [
+      resolve(),
+      babel({ babelHelpers: 'bundled' }),
+      scss(processScss('vuevectormap.css'))
+    ],
+  },
+  {
+    input: 'src/index.js',
+    output: {
       name: 'VueVectorMap',
       file: 'dist/js/vuevectormap.min.js',
       format: 'umd',
-      globals: {
-        jsvectormap: 'jsVectorMap',
-      },
       plugins: [terser()],
-    }
-  ],
-  external: ['jsvectormap', 'vue'],
-  plugins: [
-    resolve(),
-    babel({ babelHelpers: 'bundled' }),
-    css({ output: 'dist/css/vuevectormap.css' }),
-  ],
-}
+      globals: {
+        jsvectormap: 'jsVectorMap'
+      },
+    },
+    external: ['jsvectormap', 'vue'],
+    plugins: [
+      resolve(),
+      babel({ babelHelpers: 'bundled' }),
+      scss(processScss('vuevectormap.min.css', 'compressed'))
+    ],
+  }
+]
