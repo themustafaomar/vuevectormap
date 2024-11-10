@@ -2,9 +2,15 @@
   "name": "vuevectormap",
   "version": "2.0.1",
   "description": "A Vue wrapper component for Jsvectormap",
-  "main": "dist/js/vuevectormap.min.js",
+  "main": "dist/js/vuevectormap.js",
+  "module": "dist/js/vuevectormap.esm.js",
   "style": "dist/css/vuevectormap.css",
   "sass": "src/scss/vuevectormap.scss",
+  "exports": {
+    "default": "./dist/js/vuevectormap.js",
+    "import": "./dist/js/vuevectormap.esm.js",
+    "require": "./dist/js/vuevectormap.cjs.js"
+  },
   "author": {
     "name": "Mustafa Omar",
     "email": "themustafaomar@gmail.com"
@@ -35,8 +41,8 @@
   "license": "MIT",
   "homepage": "https://github.com/themustafaomar/vuevectormap#readme",
   "dependencies": {
-    "jsvectormap": "^1.4.5",
-    "vue": "^3.2.31"
+    "jsvectormap": "^1.6.0",
+    "vue": "^3.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.17.0",

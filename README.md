@@ -1,20 +1,24 @@
 # VueVectorMap
-A Vue wrapper component for Jsvectormap [jsvectormap](https://github.com/themustafaomar/jsvectormap)
+
+A Vue wrapper component for [jsvectormap](https://github.com/themustafaomar/jsvectormap)
 
 ## Versions
 
 | Vuejs version | Package version | Branch |
 | :---          |:---------------:| ---:   | 
-| 3.x           |       2.x       | `next` (in development) |
+| 3.x           |       2.x       | `next` |
 | 2.x           |       1.x       | [master](https://github.com/themustafaomar/vuevectormap/tree/master) |
 
 ## Installation
-Installing via npm
-```
-npm i vuevectormap@next
+
+To get started with vuevectormap, you can install it through your preferred package manager.
+
+```bash
+npm i vuevectormap@next # pnpm add vuevectormap || yarn add vuevectormap
 ```
 
 ## Demo
+
 Example at [vuevectormap](https://codepen.io/themustafaomar/pen/pojyerx)<br>
 Example at [codesandbox](https://4f9cw.csb.app) and [code](https://codesandbox.io/s/vuevectormap-4f9cw)
 
