@@ -26,17 +26,17 @@ Example at [codesandbox](https://4f9cw.csb.app) and [code](https://codesandbox.i
 
 ```js
 import { createApp } from 'vue'
-import VueVectorMap from 'vuevectormap'
+import vueVectorMap from 'vuevectormap'
 import 'vuevectormap/src/scss/vuevectormap.scss'
+import 'jsvectormap/dist/maps/world'
 
-// Import your preferred map
-require('jsvectormap/dist/maps/world')
+const app = createApp({
+  //
+})
 
-const app = createApp({})
-
-app.use(VueVectorMap, {
+app.use(vueVectorMap, {
   // Set global options if any etc..
-  backgroundColor: '#f6f6f6'
+  backgroundColor: '#f6f6f6',
 })
 
 app.mount('#app')
