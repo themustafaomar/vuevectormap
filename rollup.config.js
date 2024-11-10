@@ -14,38 +14,47 @@ function processScss(filename, outputStyle = 'expanded') {
 
 export default [
   {
-    input: 'src/js/index.js',
+    input: 'src/index.js',
     output: {
       name: 'VueVectorMap',
       file: 'dist/js/vuevectormap.js',
       format: 'umd',
-      globals: {
-        jsvectormap: 'jsVectorMap'
-      },
+      globals: { jsvectormap: 'jsVectorMap' },
+      plugins: [terser()],
     },
     external: ['jsvectormap', 'vue'],
     plugins: [
       resolve(),
       babel({ babelHelpers: 'bundled' }),
-      scss(processScss('vuevectormap.css'))
+      scss(processScss('vuevectormap.css')),
     ],
   },
   {
-    input: 'src/js/index.js',
+    input: 'src/index.js',
     output: {
-      name: 'VueVectorMap',
-      file: 'dist/js/vuevectormap.min.js',
-      format: 'umd',
+      file: 'dist/js/vuevectormap.cjs.js',
+      format: 'cjs',
       plugins: [terser()],
-      globals: {
-        jsvectormap: 'jsVectorMap'
-      },
     },
     external: ['jsvectormap', 'vue'],
     plugins: [
       resolve(),
       babel({ babelHelpers: 'bundled' }),
-      scss(processScss('vuevectormap.min.css', 'compressed'))
+      scss(processScss('vuevectormap.min.css', 'compressed')),
     ],
-  }
+  },
+  {
+    input: 'src/index.js',
+    output: {
+      file: 'dist/js/vuevectormap.esm.js',
+      format: 'es',
+      plugins: [terser()],
+    },
+    external: ['jsvectormap', 'vue'],
+    plugins: [
+      resolve(),
+      babel({ babelHelpers: 'bundled' }),
+      scss(processScss('vuevectormap.min.css', 'compressed')),
+    ],
+  },
 ]
